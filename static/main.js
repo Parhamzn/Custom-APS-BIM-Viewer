@@ -118,13 +118,8 @@ function hslToRgb(h, s, l) {
   return [r + m, g + m, b + m];
 }
 function numericColor(t, highIs) {
-  // red (worst) → muted forest green (best). The green end is pinned to RGB(45,105,67);
-  // hue, saturation and lightness taper smoothly from the red end to that exact color.
-  const g = highIs === 'good' ? t : 1 - t;    // 0 = red end, 1 = green end
-  const hue   = g * 142;                       //   0  → 142
-  const sat   = 0.65 + (0.40   - 0.65) * g;    // 0.65 → 0.40
-  const light = 0.50 + (0.2941 - 0.50) * g;    // 0.50 → 0.2941  (→ exactly 45,105,67)
-  return hslToRgb(hue, sat, light);
+  const hue = highIs === 'good' ? t * 140 : (1 - t) * 140;
+  return hslToRgb(hue, 0.65, 0.5);
 }
 function hexToRgb(hex) {
   const n = parseInt(hex.slice(1), 16);
