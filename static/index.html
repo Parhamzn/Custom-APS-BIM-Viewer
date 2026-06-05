@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BIM Viewer — Climate Neutral &amp; Circular Building</title>
+
+  <!-- Autodesk Viewer SDK (v7, latest) from the APS CDN -->
+  <link rel="stylesheet"
+        href="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/style.min.css"
+        type="text/css">
+  <script src="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/viewer3D.min.js"></script>
+
+  <link rel="stylesheet" href="/static/style.css" type="text/css">
+</head>
+<body>
+  <header id="topbar">
+    <div class="title">Climate Neutral &amp; Circular Building
+      <span class="sub">ETH IBI Master Project</span>
+    </div>
+    <div class="controls">
+      <label for="model-select">Model</label>
+      <select id="model-select"></select>
+      <label for="color-select">Color by</label>
+      <select id="color-select" disabled></select>
+      <button id="summary-btn" class="btn">Summary</button>
+      <button id="filter-btn" class="btn">Filter</button>
+      <span id="status" class="status">starting…</span>
+    </div>
+  </header>
+
+  <div id="viewer"></div>
+  <div id="legend"></div>
+
+  <!-- Summary-by-category panel (left) -->
+  <aside id="summary">
+    <div class="ins-head">
+      <span id="sum-title">Summary</span>
+      <button id="summary-close" title="Close">×</button>
+    </div>
+    <div class="sum-controls">
+      <label>Group by<select id="sum-group"></select></label>
+      <label>Measure<select id="sum-measure"></select></label>
+    </div>
+    <div id="sum-body"></div>
+  </aside>
+
+  <!-- Filter by Building layer / Building design (left) -->
+  <aside id="filter">
+    <div class="ins-head">
+      <span id="filter-title">Filter</span>
+      <button id="filter-close" title="Close">×</button>
+    </div>
+    <div id="filter-body"></div>
+  </aside>
+
+  <!-- Click-to-inspect passport panel (right) -->
+  <aside id="inspector">
+    <div class="ins-head">
+      <span id="ins-title">Element</span>
+      <button id="ins-close" title="Close">×</button>
+    </div>
+    <div id="ins-body"></div>
+  </aside>
+
+  <script src="/static/main.js"></script>
+</body>
+</html>

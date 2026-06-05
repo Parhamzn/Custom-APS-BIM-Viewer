@@ -1,0 +1,18 @@
+[
+  {
+    "id": "lod200",
+    "name": "LOD 200",
+    "urn": "dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6eHp4YmJheWJ5a2R0bTRqYWpkdXJwZnJieW02aHh4Z2E4ZHd6dndmd2dlbXM4YXliLWJpbXZpZXdlci9MT0QyMDAucnZ0",
+    "bucket": "xzxbbaybykdtm4jajdurpfrbym6hxxga8dwzvwfwgems8ayb-bimviewer",
+    "object": "LOD200.rvt",
+    "region": "US"
+  },
+  {
+    "name": "LOD 300",
+    "urn": "dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6eHp4YmJheWJ5a2R0bTRqYWpkdXJwZnJieW02aHh4Z2E4ZHd6dndmd2dlbXM4YXliLWJpbXZpZXdlci9MT0QzMDBfRklOQUwucnZ0",
+    "bucket": "xzxbbaybykdtm4jajdurpfrbym6hxxga8dwzvwfwgems8ayb-bimviewer",
+    "object": "LOD300_FINAL.rvt",
+    "region": "US",
+    "id": "lod300"
+  }
+]

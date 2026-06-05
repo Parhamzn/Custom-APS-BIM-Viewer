@@ -1,0 +1,12 @@
+# NEVER commit real credentials — the Client Secret lives only in .env locally and in the
+# host's environment-variable settings (Render dashboard), never in the repo.
+.env
+
+# logs, caches, OS cruft
+*.log
+__pycache__/
+*.pyc
+.DS_Store
+
+# legacy single-model file (superseded by models.json, which IS committed)
+model.json
