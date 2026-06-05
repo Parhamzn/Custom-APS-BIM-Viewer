@@ -1,49 +1,62 @@
-# BIM Viewer (Autodesk Platform Services)
+# Custom APS BIM Viewer
 
-Revives the 2021 ETH IBI Master Project web viewer: it uploads the Revit model to
-Autodesk Platform Services (APS, formerly Forge), translates it to the SVF2 viewer
-format, and serves it in the browser with the Autodesk Viewer SDK.
+**▶ Live demo: https://custom-aps-bim-viewer.onrender.com**
+
+A web-based BIM viewer for the **ETH Zürich IBI Master Project** — *"Climate Neutral &
+Circular Buildings through a Digitally Enabled Framework"* (Group 2, 2021). It streams the
+project's Revit models from **Autodesk Platform Services** (APS, formerly Forge) and overlays
+the building's **material-passport** data — embodied carbon, lifespan, reuse/recycling
+potential, manufacturers, and more — directly onto the 3D model.
+
+## Features
+
+- **Model switcher** — LOD 200 and LOD 300, each opening at a consistent isometric view.
+- **Color by** — shade every element by a passport metric (embodied CO₂, lifespan, reused,
+  reuse/recycling potential, waste, U-value, number of elements, building layer, connection
+  type), with report-accurate fixed thresholds and a legend.
+- **Summary** — aggregate by building layer / design / material / Revit category × measure
+  (total CO₂, count, avg lifespan/reuse) as a donut + bar chart; click a group to isolate it
+  in 3D. Embodied CO₂ comes out **net-negative** (the timber structure stores carbon), so it
+  uses diverging bars.
+- **Filter** — show/hide elements by building layer and building design.
+- **Click-to-inspect** — a consolidated passport panel per element (materials, manufacturer,
+  CO₂, lifespan, reuse/recycle/waste, …), merged from the model and the spreadsheet passport.
+- **Wood skin** — the timber columns and slabs render in the pergola's wood tone in
+  original-colors mode.
+
+The passport from `Components, properties and material passport.xlsx` is parsed into
+`static/passport.json` and joined to model elements (by Building Design, with family-name
+aliases) to fill in data the Revit model itself is missing.
 
 ## Architecture
 
-```
-aps_pipeline.py   one-time: auth -> bucket -> S3 upload -> translate -> poll -> model.json
-server.py         Flask: serves the page + /api/token (read-only) + /api/model
-static/           the viewer web page (index.html, main.js, style.css)
-.env              your APS_CLIENT_ID / APS_CLIENT_SECRET   (gitignored)
-```
+| File | Role |
+|------|------|
+| `server.py` | Flask app — serves the page, issues a read-only `viewables:read` token (`/api/token`; the Client Secret never reaches the browser), and the model list (`/api/models`). |
+| `static/` | Viewer UI (Autodesk Viewer v7 SDK) + `passport.json`. |
+| `aps_pipeline.py` | One-time tool — upload a `.rvt` to APS, translate to SVF2, register it in `models.json`. |
+| `aps_common.py` | Shared APS auth / OSS / URN helpers. |
 
-The Client Secret stays on the server. The browser only ever receives a short-lived
-token scoped `viewables:read`.
+The browser only ever receives a short-lived, view-only token; the Client Secret stays on the
+server.
 
-## Setup
+## Run locally
 
-Requires Python 3 with `flask` and `requests` (already installed on this machine).
+Requires Python 3 with `flask` + `requests`.
 
-1. **Add credentials.** Edit `.env` and set `APS_CLIENT_ID` and `APS_CLIENT_SECRET`
-   from https://aps.autodesk.com/myapps (no callback URL needed — this uses
-   2-legged auth).
+1. Copy `.env.example` to `.env` and set `APS_CLIENT_ID` / `APS_CLIENT_SECRET` from
+   <https://aps.autodesk.com/myapps> (2-legged auth — no callback URL needed).
+2. *(First time only, to add/translate a model)* `python3 aps_pipeline.py --path "../Some Model.rvt" --id lodXXX --name "LOD XXX" --object LODXXX.rvt`
+3. `python3 server.py` → <http://localhost:8080>
 
-2. **Upload + translate the model** (one time, ~5–15 min for the 49 MB LOD 300 file):
+## Deploy
 
-   ```bash
-   python3 aps_pipeline.py
-   ```
+Hosted on **Render** (free tier). `requirements.txt` + `Procfile`
+(`gunicorn server:app --bind 0.0.0.0:$PORT`) drive the build, and the **Client ID/Secret are
+set as Render environment variables** — never committed (`.env` is gitignored). Pushing to
+`main` auto-redeploys. The models are already translated in APS cloud storage, so no re-upload
+is needed on deploy.
 
-   This writes `model.json` with the model's URN.
+---
 
-3. **Run the viewer:**
-
-   ```bash
-   python3 server.py
-   ```
-
-   Open http://localhost:8080
-
-## Notes
-
-- Default model is `../LOD 300 FINAL MODEL Group 2.rvt`. Point `APS_MODEL_PATH` at the
-  LOD 200 file (or any `.rvt`/`.ifc`) to translate a different one.
-- If your APS account is in the EMEA region, set `APS_REGION=EMEA` in `.env`.
-- The bucket is `persistent`, so you only upload once; re-running the pipeline just
-  re-translates.
+*ETH Zürich, Institut für Bau- und Infrastrukturmanagement (IBI) — Master Project, Group 2, 2021.*
