@@ -20,7 +20,7 @@ This viewer was built for **Flexilibres**, the final project of an **ETH Zürich
 </div>
 
 <p align="center">
-  <img src="docs/equilibres-vs-flexilibres.png" width="88%" alt="Equilibres (existing) versus Flexilibres (circular redesign)">
+  <img src="docs/equilibres-flexilibres.png" width="88%" alt="Equilibres (existing) versus Flexilibres (circular redesign)">
 </p>
 
 ## The idea: circularity as a design driver
@@ -32,7 +32,7 @@ Instead of the usual linear flow (extract, manufacture, build, then demolish to 
 </div>
 
 <p align="center">
-  <img src="docs/vision-circularity.png" width="80%" alt="Vision of circularity: materialization and flexibility close the linear lifecycle">
+  <img src="docs/circularity-vision.png" width="80%" alt="Vision of circularity: materialization and flexibility close the linear lifecycle">
 </p>
 
 <div align="justify">
@@ -45,7 +45,7 @@ To steer design decisions, every building component carries a **material passpor
 - **Flexibility**: building layer (the shearing layer it belongs to), number of elements (how simple the connection system is), and building design (how interchangeable the component is).
 
 <p align="center">
-  <img src="docs/component-framework.png" width="88%" alt="Material-passport metrics defined at component and building level">
+  <img src="docs/passport-framework.png" width="88%" alt="Material-passport metrics defined at component and building level">
 </p>
 
 ## What this viewer is for
@@ -65,7 +65,7 @@ The original studio used Autodesk Forge to color the building by each passport m
 </div>
 
 <p align="center">
-  <img src="docs/viz-lifespan.png" width="82%" alt="Lifespan color-coding on the building, reproduced by the viewer">
+  <img src="docs/lifespan-view.png" width="82%" alt="Lifespan color-coding on the building, reproduced by the viewer">
 </p>
 
 ## Functionalities
