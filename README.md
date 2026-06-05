@@ -20,7 +20,18 @@ This viewer was built for **Flexilibres**, the final project of an **ETH Zürich
 </div>
 
 <p align="center">
-  <img src="docs/equilibres-flexilibres.png" width="88%" alt="Equilibres (existing) versus Flexilibres (circular redesign)">
+  <img src="docs/equilibres-flexilibres-elevation.png" width="60%" alt="Equilibres versus Flexilibres, front elevation"><br>
+  <sub><b>Front elevation</b></sub>
+</p>
+
+<p align="center">
+  <img src="docs/equilibres-flexilibres-side.png" width="76%" alt="Equilibres versus Flexilibres, side elevation"><br>
+  <sub><b>Side elevation</b></sub>
+</p>
+
+<p align="center">
+  <img src="docs/equilibres-flexilibres-section.png" width="72%" alt="Equilibres versus Flexilibres, section"><br>
+  <sub><b>Section</b></sub>
 </p>
 
 ## The idea: circularity as a design driver
